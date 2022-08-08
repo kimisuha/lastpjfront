@@ -2,48 +2,6 @@
   max-width: 99%;
 }
 
-header nav {
-  background-color: #005FA9;
-  width: 100vw;
-  margin: 0.5rem;
-  border: 1px solid transparent;
-  border-radius: 0.5rem;
-  color: white;
-}
-header .todo-nav {
-  text-transform: capitalize;
-  max-height: -webkit-fit-content;
-  max-height: -moz-fit-content;
-  max-height: fit-content;
-}
-header .todo-nav .nav-title {
-  width: 70vw;
-  display: flex;
-  justify-content: space-around;
-}
-header .todo-nav #logo-of-app {
-  max-width: 5rem;
-  max-height: 5rem;
-  border: 1px solid transparent;
-  border-radius: 50%;
-  align-self: flex-start;
-  cursor: pointer;
-}
-header .todo-nav #avata {
-  max-width: 5rem;
-  max-height: 5rem;
-  border: 1px solid transparent;
-  border-radius: 50%;
-}
-header .todo-nav .collapse {
-  margin-top: 0.5rem;
-}
-header button.navbar-toggler {
-  color: white;
-  background-color: transparent;
-  font-size: xx-large;
-}
-
 .alert {
   margin: 1rem;
   text-transform: capitalize;
@@ -58,35 +16,18 @@ header button.navbar-toggler {
   border: 1px solid transparent;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
+  border-right: 1px solid #005FA9;
   background-color: burlywood;
   /* z-index: 9999; */
 }
 .content .content-left .content-left-nav {
   padding: 0.5rem;
-}
-.content .content-left #addModal label,
-.content .content-left #addModal h3 {
-  text-transform: capitalize;
-}
-.content .content-left #addModal .modal-header {
-  background-color: #005FA9;
-  color: white;
-}
-.content .content-left #addModal .modal-header button {
-  color: red;
-}
-.content .content-left #addModal .error {
-  color: red;
+  background-color: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
 }
 .content .content-left #tooggleNavlef {
   font-size: x-large;
-}
-.content .content-left a {
-  color: white;
-  font-size: x-large;
-}
-.content .content-left a:hover {
-  color: #005FA9;
 }
 .content .content-left ul li {
   list-style: none;
@@ -101,7 +42,7 @@ header button.navbar-toggler {
   color: #005FA9;
 }
 .content .content-mid {
-  background-color: #7741BD;
+  background-color: #DEB887;
   color: #005FA9;
   border: 0.5px solid transparent;
   border-top-right-radius: 0.5rem;
@@ -110,22 +51,6 @@ header button.navbar-toggler {
 .content .content-mid h2 {
   text-transform: capitalize;
   border-bottom: 1px solid white;
-}
-.content .content-mid .todo-item {
-  text-align: center;
-  overflow: hidden;
-  /* max-height: 7rem; */
-  margin: 0.5rem 0;
-}
-.content .content-mid .todo-item .todo-item-control p {
-  cursor: pointer;
-}
-.content .content-mid .todo-item .todo-item-bton {
-  display: flex;
-  justify-content: space-around;
-  font-size: xx-large;
-  border: 1px solid transparent;
-  cursor: pointer;
 }
 .content .content-right {
   background-color: #005FA9;
@@ -159,10 +84,26 @@ header button.navbar-toggler {
   color: white;
 }
 
+.todo-item-outplan {
+  background-color: red;
+  color: white;
+}
+
 .span-share {
   border: 1px solid transparent;
   border-radius: 0.5rem;
   padding: 0.3rem;
   background-color: #005FA9;
   color: white;
+}
+
+#addModal label,
+#addModal h3 {
+  text-transform: capitalize;
+}
+#addModal .modal-header button {
+  color: red;
+}
+#addModal .error {
+  color: red;
 }/*# sourceMappingURL=Dashboard.css.map */

@@ -31,11 +31,14 @@ const Signup = () => {
 
         }),
         onSubmit: async function (values) {
+            console.log(values);
             await axios.post("http://localhost:5000/user", values)
                 .then((res) => {
                     console.log(res)
-                    if (res.status == 200)
+                    if (res.status === 200) {
+                        // window.localStorage.setItem("token", res.data.token);
                         navigate('/');
+                    }
                 })
                 .catch((err) => {
                     console.log(err);

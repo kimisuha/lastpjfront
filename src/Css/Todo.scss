@@ -1,0 +1,23 @@
+.todo-item {
+
+    height: auto;
+    text-align: center;
+    overflow: hidden;
+
+    margin: 0.5rem 0;
+
+    .todo-item-control p {
+        cursor: pointer;
+    }
+
+    .todo-item-bton {
+        display: flex;
+        justify-content: space-around;
+
+        font-size: xx-large;
+
+        border: 1px solid transparent;
+        cursor: pointer;
+
+    }
+}

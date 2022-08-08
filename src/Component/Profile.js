@@ -5,6 +5,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Head from './Head';
+import Footer from './Footer';
 
 /* export const sercurityPass = async (pass) => {
     const salt = 10;
@@ -30,15 +32,20 @@ const Profile = () => {
     modifiedToggle();
 
     const getDefault = async (id) => {
-        await axios.get("http://localhost:5000/user/" + id)
+        await axios.get("http://localhost:5000/user/" + id, {
+            headers: {
+                Authorization: window.localStorage.getItem("token")
+            }
+        })
             .then((res) => {
                 //console.log(res);
                 setData(res.data);
             }).catch((res) => {
-                console.log(res.response.status)
+                //console.log(res.response.status)
                 if (res.response.status == 403)
                     navigate('/verify')
-                navigate('/');
+                else
+                    navigate('/');
             });
     }
 
@@ -48,7 +55,7 @@ const Profile = () => {
 
     useEffect(() => {
         $("#save").attr("disabled", "disabled");
-        getDefault('62eb0104e710284d4f281cca');
+        getDefault(window.localStorage.getItem("id"));
     }, []);
 
     /*     const convertDate = () => {
@@ -57,6 +64,8 @@ const Profile = () => {
         } */
 
     /* convertDate(); */
+
+    // console.log((window.localStorage.getItem("token")));
 
     const formik = useFormik({
         initialValues: {
@@ -83,7 +92,11 @@ const Profile = () => {
             });
 
 
-            await axios.put("http://localhost:5000/user/" + "62eb0104e710284d4f281cca", values)
+            await axios.put("http://localhost:5000/user/" + window.localStorage.getItem("id"),
+                values,
+                {
+                    Authorization: window.localStorage.getItem("token")
+                })
                 .then((res) => {
                     if (res.status == 200) {
                         console.log(res);
@@ -119,7 +132,7 @@ const Profile = () => {
             /* values.password = sercurityPass(values.password);
             console.log(values); */
 
-            await axios.post("http://localhost:5000/user/" + "62eb82940f3f6f08ac59d3f0", values)
+            await axios.post("http://localhost:5000/user/" + window.localStorage.getItem("id"), values)
                 .then((res) => {
                     /* if (res.status == 200){
                         window.location.reload();
@@ -136,120 +149,124 @@ const Profile = () => {
     });
 
     return (
-        <div class="container">
-            <div class="row profile-head">
-                <div class="col-1">
-                    <Link to={'/dashboard'}>
-                        <i class="bi bi-arrow-left-circle"></i>
-                    </Link>
+        <div>
+            <Head></Head>
+            <div className='container'>
+                <div class="row profile-head">
+                    <div class="col-1">
+                        <Link to={'/dashboard'}>
+                            <i class="bi bi-arrow-left-circle"></i>
+                        </Link>
+                    </div>
+                    <div class="col-11 text-center profile-avata">
+                        <img src="http://creativeedtech.weebly.com/uploads/4/1/6/3/41634549/published/avatar.png?1487742111"
+                            alt="test" class="img-fluid" />
+                        <h1 class="mt-3">your name</h1>
+                    </div>
                 </div>
-                <div class="col-11 text-center profile-avata">
-                    <img src="http://creativeedtech.weebly.com/uploads/4/1/6/3/41634549/published/avatar.png?1487742111"
-                        alt="test" class="img-fluid" />
-                    <h1 class="mt-3">your name</h1>
-                </div>
-            </div>
 
-            <div class="row profile-body d-block">
-                <h1 class="ml-4">infomation</h1>
+                <div class="row profile-body d-block">
+                    <h1 class="ml-4">infomation</h1>
 
-                <form onSubmit={formik.handleSubmit}>
-                    <div class="form-group">
-                        <label for="email">email</label>
-                        <input type="email" placeholder="youremail@gmail.com" class="form-control" name="email" id="email"
-                            value={formik.values.email} onChange={formik.handleChange} disabled
-                        />
-                        {formik.errors.email && formik.touched.email && (
-                            <p className='error'>{formik.errors.email}</p>
-                        )}
+                    <form onSubmit={formik.handleSubmit}>
+                        <div class="form-group">
+                            <label for="email">email</label>
+                            <input type="email" placeholder="youremail@gmail.com" class="form-control" name="email" id="email"
+                                value={formik.values.email} onChange={formik.handleChange} disabled
+                            />
+                            {formik.errors.email && formik.touched.email && (
+                                <p className='error'>{formik.errors.email}</p>
+                            )}
 
-                    </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="username">user name</label>
-                        <input type="text" class="form-control" name="username" id="username"
-                            value={formik.values.username} onChange={formik.handleChange} disabled
-                        />
-                        {formik.errors.username && formik.touched.username && (
-                            <p className='error'>{formik.errors.username}</p>
-                        )}
+                        <div class="form-group">
+                            <label for="username">user name</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                value={formik.values.username} onChange={formik.handleChange} disabled
+                            />
+                            {formik.errors.username && formik.touched.username && (
+                                <p className='error'>{formik.errors.username}</p>
+                            )}
 
-                    </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="birth">date birth</label>
-                        <input type="date" class="form-control" name="birth" id="birth"
-                            value={formik.values.birth} onChange={formik.handleChange} disabled
-                        />
-                        {formik.errors.birth && formik.touched.birth && (
-                            <p className='error'>{formik.errors.birth}</p>
-                        )}
+                        <div class="form-group">
+                            <label for="birth">date birth</label>
+                            <input type="date" class="form-control" name="birth" id="birth"
+                                value={formik.values.birth} onChange={formik.handleChange} disabled
+                            />
+                            {formik.errors.birth && formik.touched.birth && (
+                                <p className='error'>{formik.errors.birth}</p>
+                            )}
 
-                    </div>
+                        </div>
 
-                    <button class="btn btn-danger text-white text-capitalize" type="button"
-                        id="change password" data-toggle="modal" data-target="#changerpass">change password</button>
+                        <button class="btn btn-danger text-white text-capitalize" type="button"
+                            id="change password" data-toggle="modal" data-target="#changerpass">change password</button>
 
-                    <div class="form-group col-12 text-center">
-                        <button class="btn btn-primary text-capitalize" type="submit" id="save">done</button>
+                        <div class="form-group col-12 text-center">
+                            <button class="btn btn-primary text-capitalize" type="submit" id="save">done</button>
 
-                        <button class="btn btn-warning text-white text-capitalize" type="button"
-                            id="infoChange">change</button>
-                    </div>
-                </form>
+                            <button class="btn btn-warning text-white text-capitalize" type="button"
+                                id="infoChange">change</button>
+                        </div>
+                    </form>
 
-                <div className='modal' id='changerpass'>
-                    <div className='modal-dialog'>
-                        <div className='modal-content'>
-                            <div className='modal-header bg-danger text-light text-capitalize'>
-                                <h3>changer password</h3>
+                    <div className='modal' id='changerpass'>
+                        <div className='modal-dialog'>
+                            <div className='modal-content'>
+                                <div className='modal-header bg-danger text-light text-capitalize'>
+                                    <h3>changer password</h3>
 
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
-                            <div className='modal-body'>
-                                <form id='changpassword' onSubmit={checkmodal.handleSubmit}>
-                                    <div className='form-group'>
-                                        <label for="currentpass" className='form-lable'>current password</label>
-                                        <input type={'password'} name='currentpass' id='currentpass' className='form-control'
-                                            value={checkmodal.values.currentpass} onChange={checkmodal.handleChange}
-                                        ></input>
-                                        {checkmodal.errors.currentpass && checkmodal.touched.currentpass && (
-                                            <p className='error'>{checkmodal.errors.currentpass}</p>
-                                        )}
-                                    </div>
+                                <div className='modal-body'>
+                                    <form id='changpassword' onSubmit={checkmodal.handleSubmit}>
+                                        <div className='form-group'>
+                                            <label for="currentpass" className='form-lable'>current password</label>
+                                            <input type={'password'} name='currentpass' id='currentpass' className='form-control'
+                                                value={checkmodal.values.currentpass} onChange={checkmodal.handleChange}
+                                            ></input>
+                                            {checkmodal.errors.currentpass && checkmodal.touched.currentpass && (
+                                                <p className='error'>{checkmodal.errors.currentpass}</p>
+                                            )}
+                                        </div>
 
-                                    <div className='form-group'>
-                                        <label for="newpassword" className='form-lable'>new password</label>
-                                        <input type={'password'} name='newpass' id='newpass' className='form-control'
-                                            value={checkmodal.values.newpass} onChange={checkmodal.handleChange}
-                                        ></input>
-                                        {checkmodal.errors.newpass && checkmodal.touched.newpass && (
-                                            <p className='error'>{checkmodal.errors.newpass}</p>
-                                        )}
-                                    </div>
+                                        <div className='form-group'>
+                                            <label for="newpassword" className='form-lable'>new password</label>
+                                            <input type={'password'} name='newpass' id='newpass' className='form-control'
+                                                value={checkmodal.values.newpass} onChange={checkmodal.handleChange}
+                                            ></input>
+                                            {checkmodal.errors.newpass && checkmodal.touched.newpass && (
+                                                <p className='error'>{checkmodal.errors.newpass}</p>
+                                            )}
+                                        </div>
 
-                                    <div className='form-group'>
-                                        <label for="confirmpassword" className='form-lable'>confirm new password</label>
-                                        <input type={'password'} name='confirmpass' id='confirmpass' className='form-control'
-                                            value={checkmodal.values.confirmpass} onChange={checkmodal.handleChange}
-                                        ></input>
-                                        {checkmodal.errors.confirmpass && checkmodal.touched.confirmpass && (
-                                            <p className='error'>{checkmodal.errors.confirmpass}</p>
-                                        )}
-                                    </div>
+                                        <div className='form-group'>
+                                            <label for="confirmpassword" className='form-lable'>confirm new password</label>
+                                            <input type={'password'} name='confirmpass' id='confirmpass' className='form-control'
+                                                value={checkmodal.values.confirmpass} onChange={checkmodal.handleChange}
+                                            ></input>
+                                            {checkmodal.errors.confirmpass && checkmodal.touched.confirmpass && (
+                                                <p className='error'>{checkmodal.errors.confirmpass}</p>
+                                            )}
+                                        </div>
 
-                                    <div className='form-group text-center'>
-                                        <button type='submit' className='btn btn-danger text-capitalize'>change</button>
-                                    </div>
-                                </form>
+                                        <div className='form-group text-center'>
+                                            <button type='submit' className='btn btn-danger text-capitalize'>change</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 

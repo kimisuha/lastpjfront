@@ -2,64 +2,7 @@
     max-width: 99%;
 }
 
-
-header {
-
-    nav {
-        background-color: #005FA9;
-        width: 100vw;
-        margin: 0.5rem;
-
-        border: 1px solid transparent;
-        border-radius: 0.5rem;
-
-        color: white;
-    }
-
-    .todo-nav {
-        text-transform: capitalize;
-        max-height: fit-content;
-
-
-        .nav-title {
-            width: 70vw;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        #logo-of-app {
-            max-width: 5rem;
-            max-height: 5rem;
-            border: 1px solid transparent;
-            border-radius: 50%;
-
-            align-self: flex-start;
-            cursor: pointer;
-        }
-
-        #avata {
-            max-width: 5rem;
-            max-height: 5rem;
-
-            border: 1px solid transparent;
-            border-radius: 50%;
-        }
-
-        .collapse {
-            margin-top: 0.5rem;
-        }
-    }
-
-    button.navbar-toggler {
-        color: white;
-        background-color: transparent;
-
-        font-size: xx-large;
-    }
-
-}
-
-.alert{
+.alert {
     margin: 1rem;
     text-transform: capitalize;
     color: #005FA9;
@@ -73,46 +16,20 @@ header {
         border: 1px solid transparent;
         border-top-left-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
+        border-right: 1px solid #005FA9;
         background-color: burlywood;
 
         /* z-index: 9999; */
 
-        .content-left-nav{
+        .content-left-nav {
             padding: 0.5rem;
+            background-color: transparent;
+            border: 1px solid transparent;
+            box-shadow: none;
         }
 
-        #addModal {
-
-            label,
-            h3 {
-                text-transform: capitalize;
-            }
-
-            .modal-header {
-                background-color: #005FA9;
-                color: white;
-
-                button {
-                    color: red;
-                }
-            }
-
-            .error {
-                color: red;
-            }
-        }
-
-        #tooggleNavlef{
+        #tooggleNavlef {
             font-size: x-large;
-        }
-
-        a {
-            color: white;
-            font-size: x-large;
-        }
-
-        a:hover {
-            color: #005FA9;
         }
 
         ul {
@@ -127,14 +44,14 @@ header {
             }
         }
 
-        p{
+        p {
             cursor: pointer;
             color: #005FA9;
         }
     }
 
     .content-mid {
-        background-color: #7741BD;
+        background-color: #DEB887;
         color: #005FA9;
 
         border: 0.5px solid transparent;
@@ -146,29 +63,7 @@ header {
             border-bottom: 1px solid white;
         }
 
-        .todo-item {
-
-            text-align: center;
-            overflow: hidden;
-            /* max-height: 7rem; */
-
-            margin: 0.5rem 0;
-
-            .todo-item-control p {
-                cursor: pointer;
-            }
-
-            .todo-item-bton {
-                display: flex;
-                justify-content: space-around;
-
-                font-size: xx-large;
-
-                border: 1px solid transparent;
-                cursor: pointer;
-
-            }
-        }
+        
     }
 
     .content-right {
@@ -195,6 +90,9 @@ header {
     }
 }
 
+
+
+
 .todo-item {
     height: 9rem;
 }
@@ -208,10 +106,34 @@ header {
     color: white;
 }
 
-.span-share{
+.todo-item-outplan {
+    background-color: red;
+    color: white;
+}
+
+.span-share {
     border: 1px solid transparent;
     border-radius: 0.5rem;
     padding: 0.3rem;
     background-color: #005FA9;
     color: white;
+}
+
+#addModal {
+
+    label,
+    h3 {
+        text-transform: capitalize;
+    }
+
+    .modal-header {
+
+        button {
+            color: red;
+        }
+    }
+
+    .error {
+        color: red;
+    }
 }

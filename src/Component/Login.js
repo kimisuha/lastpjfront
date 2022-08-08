@@ -2,9 +2,11 @@ import '../Css/Login.css';
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function Login() {
+    const navigate = useNavigate();
 
     const formilk = useFormik({
         initialValues: {
@@ -17,10 +19,67 @@ function Login() {
             email: yup.string().email("invalid email!").required("required"),
             password: yup.string().required("required")
         }),
-        onSubmit: function (values) {
-            console.log(values);
+        onSubmit: async function (values) {
+            await axios.post("http://localhost:5000/", values)
+                .then(async (res) => {
+                    //console.log(res);
+                    if (res.status == 200) {
+                        console.log(res.data)
+                        window.localStorage.setItem("token", res.data.token);
+                        console.log(window.localStorage.getItem("token"));
+
+                        window.localStorage.setItem("id", res.data._id);
+                        await axios.get("http://localhost:5000/user/" + res.data._id, {
+                            headers: {
+                                Authorization: res.data.token
+                            }
+                        })
+                            .then((res) => {
+                                navigate('/dashboard');
+                            }).catch((res) => {
+                                console.log(res.response.status)
+
+
+                                if (res.response.status == 200) {
+                                    navigate('/dashboard');
+                                } else if (res.response.status == 403) {
+                                    navigate('/verify');
+                                }
+                            });
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    window.location.reload();
+                })
         }
-    });
+    }, []);
+
+    /*     const checklogin = async () => {
+            
+        } */
+
+    async function checklogin() {
+        if (window.localStorage.getItem("token")) {
+            let check = await axios.get("http://localhost:5000/", {
+                headers: {
+                    Authorization: window.localStorage.getItem("token")
+                }
+            })
+                .then((res) => {
+                    if (res.status === 200)
+                        navigate('/dashboard')
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }
+
+    useEffect(() => {
+        checklogin();
+    })
+
 
     return (
         <div class="container">
@@ -87,6 +146,6 @@ function Login() {
             </div>
         </div>
     )
-}
 
+}
 export default Login;

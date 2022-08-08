@@ -1,141 +1,40 @@
-import { useFormik } from "formik";
-import * as yup from 'yup';
+import React from 'react';
+import axios from 'axios';
 
-const Testvalid = () => {
-    const formik = useFormik({
-        initialValues: {
-            test: "",
-            email: ""
-        },
-        validationSchema: yup.object({
-            test: yup.string().min(2, "at least 2 character").max(10, 'max 10 character').required("need"),
-            email: yup.string().email("invalid email").required("need!")
-        })
-    });
+function Test() {
+    function allStorage() {
 
+        var values = [],
+            keys = Object.keys(localStorage),
+            i = keys.length;
 
-
-
-    return (
-        <div>
-            <form className="m-auto text-light" onSubmit={formik.handleSubmit}>
-                <div>
-                    <label>test</label>
-                    <input type="text" name="test" value={formik.values.test} onChange={formik.handleChange}></input>
-                    {formik.errors.test && formik.touched.test && (
-                        <p>{formik.errors.test}</p>
-                    )}
-                </div>
-
-                <div>
-                    <label>email</label>
-                    <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange}></input>
-                    {formik.errors.email && formik.touched.email && (
-                        <p>{formik.errors.email}</p>
-                    )}
-                </div>
-
-                <button type="submit">test</button>
-            </form>
-        </div>
-    );
-}
-
-export default Testvalid;
-
-/* import React from "react";
-
-import { useFormik } from "formik";
-import * as Yup from "yup";
-
-export default function Testvalid() {
-    const formik = useFormik({
-        initialValues: {
-            full_name: "",
-            email: "",
-            password: "",
-            confirm_password: ""
-        },
-        validationSchema: Yup.object({
-            full_name: Yup.string()
-                .min(2, "Mininum 2 characters")
-                .max(15, "Maximum 15 characters")
-                .required("Required!"),
-            email: Yup.string()
-                .email("Invalid email format")
-                .required("Required!"),
-            password: Yup.string()
-                .min(8, "Minimum 8 characters")
-                .required("Required!"),
-            confirm_password: Yup.string()
-                .oneOf([Yup.ref("password")], "Password's not match")
-                .required("Required!")
-        }),
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        while (i--) {
+            values.push(localStorage.getItem(keys[i]));
         }
-    });
 
+        return values;
+    }
+
+    let test = async () => {
+        let a = allStorage;
+
+        console.log(window.localStorage.getItem("token"));
+
+        /* await axios.post('http://localhost:5000/check', {}, {
+            headers: {
+                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25maWciOnsibmFtZSI6InRlc3RtYW4iLCJpZCI6IjYyZWYwOTcwY2I5MzRiNTBlYzJjMTU2MCJ9LCJkYXRlIjoxNjU5ODM0MzYzNDg4LCJpYXQiOjE2NTk4MzQzNjN9.tSDg9GVFZP6YniWwH66WGBikF4uxL5-jyAfiIZw1akk"
+            }
+        }).then((res) => {
+            console.log(res);
+        }) */
+    }
+
+    test();
     return (
         <div>
-            <h1>Validation with Formik + Yup</h1>
-
-            <form onSubmit={formik.handleSubmit}>
-                <div>
-                    <label>Full Name</label>
-                    <input
-                        type="text"
-                        name="full_name"
-                        value={formik.values.full_name}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.errors.full_name && formik.touched.full_name && (
-                        <p>{formik.errors.full_name}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.errors.email && formik.touched.email && (
-                        <p>{formik.errors.email}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.errors.password && formik.touched.password && (
-                        <p>{formik.errors.password}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Confirm Password</label>
-                    <input
-                        type="password"
-                        name="confirm_password"
-                        value={formik.values.confirm_password}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.errors.confirm_password &&
-                        formik.touched.confirm_password && (
-                            <p>{formik.errors.confirm_password}</p>
-                        )}
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+            <button>test</button>
         </div>
     );
 }
 
- */
+export default Test;
