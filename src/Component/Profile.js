@@ -128,15 +128,17 @@ const Profile = () => {
                 .oneOf([yup.ref('newpass')], "not match!")
         }),
         onSubmit: async function (values) {
-            //console.log(values);
-            /* values.password = sercurityPass(values.password);
-            console.log(values); */
+            console.log(values);
 
-            await axios.post("http://localhost:5000/user/" + window.localStorage.getItem("id"), values)
+            await axios.post("http://localhost:5000/user/" + window.localStorage.getItem("id"), values, {
+                headers: {
+                    Authorization: window.localStorage.getItem("token"),
+                }
+            })
                 .then((res) => {
-                    /* if (res.status == 200){
+                    if (res.status === 200) {
                         window.location.reload();
-                    } */
+                    }
                     console.log(res);
 
 

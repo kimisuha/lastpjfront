@@ -49,7 +49,7 @@ function Head() {
 
                                     <button type="button" class="btn btn-danger" data-toggle="modal"
                                         data-target="#logout-modal">
-                                        <p>logout</p>
+                                        {/* <p>logout</p> */}
                                         <i class="bi bi-box-arrow-right"></i>
                                     </button>
 
@@ -61,11 +61,11 @@ function Head() {
                                                     <button type="button" class="close"
                                                         data-dismiss="modal">&times;</button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body text-center">
                                                     <h1 className='text-dark'>logout?</h1>
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <button type="button" class="btn btn-success" id='logout' onClick={() => logout()}>yes</button>
+                                                            <button type="button" class="btn btn-success" id='logout' data-dismiss="modal" onClick={() => logout()}>yes</button>
                                                         </div>
                                                         <div class="col-6">
                                                             <button type="button" class="btn btn-danger"

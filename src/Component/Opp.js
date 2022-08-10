@@ -2,6 +2,7 @@ import React from 'react';
 import '../Css/Opp.css'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
 
 function Opp() {
 
@@ -12,14 +13,21 @@ function Opp() {
         validationSchema: yup.object({
             verify: yup.number()
                 .required("required")
-                .min(5, "too less")
-                .max(5, "too more!")
         }),
         onSubmit: async function (values) {
-            console.log(values);
+            await axios.post('http://localhost:5000/check', {id: window.localStorage.getItem('id')}, {
+                headers: {
+                    Authorization: window.localStorage.getItem("token"),
+                }
+            } ).then((res) => {
+                console.log(res);
+            })
         }
 
     })
+
+    window.localStorage.clear();
+
 
     return (
         <div className='opps'>

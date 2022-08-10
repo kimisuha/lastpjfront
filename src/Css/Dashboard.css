@@ -52,24 +52,6 @@
   text-transform: capitalize;
   border-bottom: 1px solid white;
 }
-.content .content-right {
-  background-color: #005FA9;
-  border: 0.5px solid transparent;
-  border-radius: 0.5rem;
-}
-.content .content-right img {
-  border: 1px solid transparent;
-  border-radius: 50%;
-}
-.content .content-right button {
-  border: 1px solid transparent;
-}
-.content .content-right button:hover {
-  background-color: transparent;
-}
-.content .content-right button:hover img {
-  filter: blur(0.1rem);
-}
 
 .todo-item {
   height: 9rem;
@@ -106,4 +88,9 @@
 }
 #addModal .error {
   color: red;
+}
+
+.sharelist i, .headofdash i {
+  font-size: large;
+  cursor: pointer;
 }/*# sourceMappingURL=Dashboard.css.map */
